@@ -53,3 +53,11 @@ test('custom properties are copied over', async t => {
 
 	t.is(clonedResponse.foo, 'bar');
 });
+
+test('custom functions are copied over', async t => {
+	const response = await rfpify(http.get)(s.url + '/');
+	response.foo = () => 'bar';
+	const clonedResponse = cloneResponse(response);
+
+	t.is(clonedResponse.foo(), 'bar');
+});
