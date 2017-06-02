@@ -45,3 +45,11 @@ test('known properties are copied over', async t => {
 
 	cloneResponse.knownProps.forEach(prop => t.is(clonedResponse[prop], response[prop]));
 });
+
+test('custom properties are copied over', async t => {
+	const response = await rfpify(http.get)(s.url + '/');
+	response.foo = 'bar';
+	const clonedResponse = cloneResponse(response);
+
+	t.is(clonedResponse.foo, 'bar');
+});
