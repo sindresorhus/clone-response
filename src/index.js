@@ -41,4 +41,6 @@ const cloneResponse = response => {
 	return response.pipe(clone);
 };
 
+cloneResponse.knownProps = knownProps;
+
 module.exports = cloneResponse;

@@ -38,3 +38,10 @@ test('streaming multiple cloned responses', async t => {
 	t.is(firstStream, responseText);
 	t.is(clonedStream, responseText);
 });
+
+test('known properties are copied over', async t => {
+	const response = await rfpify(http.get)(s.url + '/');
+	const clonedResponse = cloneResponse(response);
+
+	cloneResponse.knownProps.forEach(prop => t.is(clonedResponse[prop], response[prop]));
+});
