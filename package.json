@@ -32,8 +32,11 @@
   "devDependencies": {
     "ava": "^0.19.1",
     "coveralls": "^2.13.1",
+    "create-test-server": "^0.1.0",
     "eslint-config-xo-lukechilds": "^1.0.0",
+    "get-stream": "^3.0.0",
     "nyc": "^10.3.2",
+    "rfpify": "^1.0.0",
     "xo": "^0.19.0"
   }
 }
