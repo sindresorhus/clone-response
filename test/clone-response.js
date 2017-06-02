@@ -43,7 +43,7 @@ test('known properties are copied over', async t => {
 	const response = await rfpify(http.get)(s.url + '/');
 	const clonedResponse = cloneResponse(response);
 
-	cloneResponse.knownProps.forEach(prop => t.is(clonedResponse[prop], response[prop]));
+	cloneResponse.knownProps.forEach(prop => t.true(typeof clonedResponse[prop] !== 'undefined'));
 });
 
 test('custom properties are copied over', async t => {
@@ -54,10 +54,12 @@ test('custom properties are copied over', async t => {
 	t.is(clonedResponse.foo, 'bar');
 });
 
-test('custom functions are copied over', async t => {
+test('function methods are bound to the original response instance', async t => {
 	const response = await rfpify(http.get)(s.url + '/');
-	response.foo = () => 'bar';
+	response.getThis = function () {
+		return this;
+	};
 	const clonedResponse = cloneResponse(response);
 
-	t.is(clonedResponse.foo(), 'bar');
+	t.is(response.getThis(), clonedResponse.getThis());
 });
