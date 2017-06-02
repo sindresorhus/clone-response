@@ -28,3 +28,13 @@ test('streaming a response twice should fail', async t => {
 	t.is(firstStream, responseText);
 	t.is(secondStream, '');
 });
+
+test('streaming multiple cloned responses', async t => {
+	const response = await rfpify(http.get)(s.url + '/');
+	const clonedResponse = cloneResponse(response);
+	const firstStream = await getStream(response);
+	const clonedStream = await getStream(clonedResponse);
+
+	t.is(firstStream, responseText);
+	t.is(clonedStream, responseText);
+});
