@@ -41,13 +41,6 @@ test('streaming multiple cloned responses succeeds', async t => {
 	t.is(clonedStream, responseText);
 });
 
-test('known properties are copied over', async t => {
-	const response = await get(s.url + '/');
-	const clonedResponse = cloneResponse(response);
-
-	cloneResponse.knownProps.forEach(prop => t.true(typeof clonedResponse[prop] !== 'undefined'));
-});
-
 test('custom properties are copied over', async t => {
 	const response = await get(s.url + '/');
 	response.foo = 'bar';
