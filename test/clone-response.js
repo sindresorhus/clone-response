@@ -58,10 +58,10 @@ test('custom properties are copied over', async t => {
 
 test('function methods are bound to the original response instance', async t => {
 	const response = await get(s.url + '/');
-	response.getThis = function () {
+	response.getContext = function () {
 		return this;
 	};
 	const clonedResponse = cloneResponse(response);
 
-	t.is(response.getThis(), clonedResponse.getThis());
+	t.is(response.getContext(), clonedResponse.getContext());
 });
