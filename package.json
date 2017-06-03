@@ -28,7 +28,9 @@
     "url": "https://github.com/lukechilds/clone-response/issues"
   },
   "homepage": "https://github.com/lukechilds/clone-response",
-  "dependencies": {},
+  "dependencies": {
+    "mimic-response": "^1.0.0"
+  },
   "devDependencies": {
     "ava": "^0.19.1",
     "coveralls": "^2.13.1",
