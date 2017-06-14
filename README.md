@@ -12,6 +12,24 @@
 npm install --save clone-response
 ```
 
+## Usage
+
+```js
+const cloneResponse = require('clone-response');
+const { get } = require('http');
+
+get('http://example.com', response => {
+  const clonedResponse = cloneResponse(response);
+  response.pipe(process.stdout);
+
+  setImmediate(() => {
+    // The response stream has already been consumed by the time this executes,
+    // however the cloned response stream is still available.
+    doSomethingWithResponse(clonedResponse);
+  });
+});
+```
+
 ## License
 
 MIT © Luke Childs
