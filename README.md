@@ -34,6 +34,16 @@ get('http://example.com', response => {
 });
 ```
 
+Please bear in mind that the process of cloning a stream consumes it. However, you can consume a stream multiple times in the same tick, therefore allowing you to create multiple clones. e.g:
+
+```js
+const clone1 = cloneResponse(response);
+const clone2 = cloneResponse(response);
+// response can still be consumed in this tick but cannot be consumed if passed
+// into any async callbacks. clone1 and clone2 can be passed around and be
+// consumed in the future.
+```
+
 ## License
 
 MIT © Luke Childs
