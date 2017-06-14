@@ -58,3 +58,7 @@ test('function methods are bound to the original response instance', async t => 
 
 	t.is(response.getContext(), clonedResponse.getContext());
 });
+
+test.after('cleanup', async () => {
+	await s.close();
+});
