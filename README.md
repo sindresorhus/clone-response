@@ -44,6 +44,18 @@ const clone2 = cloneResponse(response);
 // consumed in the future.
 ```
 
+## API
+
+### cloneResponse(response)
+
+Returns a clone of the passed in response.
+
+#### response
+
+Type: `stream`
+
+A response stream to clone.
+
 ## License
 
 MIT © Luke Childs
