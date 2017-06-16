@@ -1,4 +1,5 @@
 import http from 'http';
+import { PassThrough } from 'stream';
 import test from 'ava';
 import pify from 'pify';
 import getStream from 'get-stream';
@@ -20,6 +21,13 @@ test.before(async () => {
 
 test('cloneResponse is a function', t => {
 	t.is(typeof cloneResponse, 'function');
+});
+
+test('returns a new PassThrough stream', async t => {
+	const response = await get(s.url + '/');
+	const clonedResponse = cloneResponse(response);
+
+	t.true(clonedResponse instanceof PassThrough);
 });
 
 test('streaming a response twice should fail', async t => {
