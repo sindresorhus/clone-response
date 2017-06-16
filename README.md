@@ -1,6 +1,6 @@
 # clone-response
 
-> Clone a Node.js response object
+> Clone a Node.js HTTP response stream
 
 [![Build Status](https://travis-ci.org/lukechilds/clone-response.svg?branch=master)](https://travis-ci.org/lukechilds/clone-response)
 [![Coverage Status](https://coveralls.io/repos/github/lukechilds/clone-response/badge.svg?branch=master)](https://coveralls.io/github/lukechilds/clone-response?branch=master)
@@ -54,7 +54,7 @@ Returns a clone of the passed in response.
 
 Type: `stream`
 
-A response stream to clone.
+A [Node.js HTTP response stream](https://nodejs.org/api/http.html#http_class_http_incomingmessage) to clone.
 
 ## License
 
