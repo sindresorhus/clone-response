@@ -30,6 +30,11 @@ test('returns a new PassThrough stream', async t => {
 	t.true(clonedResponse instanceof PassThrough);
 });
 
+test('throws TypeError if response isn\'t passed in', t => {
+	const error = t.throws(() => cloneResponse());
+	t.is(error.message, 'Parameter `response` must be a response stream.');
+});
+
 test('streaming a response twice should fail', async t => {
 	const response = await get(s.url + '/');
 	const firstStream = await getStream(response);
