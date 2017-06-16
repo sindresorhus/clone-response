@@ -19,10 +19,10 @@ npm install --save clone-response
 ## Usage
 
 ```js
+const http = require('http');
 const cloneResponse = require('clone-response');
-const { get } = require('http');
 
-get('http://example.com', response => {
+http.get('http://example.com', response => {
   const clonedResponse = cloneResponse(response);
   response.pipe(process.stdout);
 
