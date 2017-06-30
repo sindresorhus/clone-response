@@ -13,10 +13,7 @@ const responseText = 'Hi!';
 
 test.before(async () => {
 	s = await createTestServer();
-
-	s.get('/', (req, res) => {
-		res.send(responseText);
-	});
+	s.get('/', (req, res) => res.send(responseText));
 });
 
 test('cloneResponse is a function', t => {
