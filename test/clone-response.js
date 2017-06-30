@@ -21,7 +21,7 @@ test('cloneResponse is a function', t => {
 });
 
 test('returns a new PassThrough stream', async t => {
-	const response = await get(s.url + '/');
+	const response = await get(s.url);
 	const clonedResponse = cloneResponse(response);
 
 	t.true(clonedResponse instanceof PassThrough);
@@ -33,7 +33,7 @@ test('throws TypeError if response isn\'t passed in', t => {
 });
 
 test('streaming a response twice should fail', async t => {
-	const response = await get(s.url + '/');
+	const response = await get(s.url);
 	const firstStream = await getStream(response);
 	const secondStream = await getStream(response);
 
@@ -42,7 +42,7 @@ test('streaming a response twice should fail', async t => {
 });
 
 test('streaming multiple cloned responses succeeds', async t => {
-	const response = await get(s.url + '/');
+	const response = await get(s.url);
 	const clonedResponse = cloneResponse(response);
 	const firstStream = await getStream(response);
 	const clonedStream = await getStream(clonedResponse);
@@ -52,7 +52,7 @@ test('streaming multiple cloned responses succeeds', async t => {
 });
 
 test('custom properties are copied over', async t => {
-	const response = await get(s.url + '/');
+	const response = await get(s.url);
 	response.foo = 'bar';
 	const clonedResponse = cloneResponse(response);
 
@@ -60,7 +60,7 @@ test('custom properties are copied over', async t => {
 });
 
 test('function methods are bound to the original response instance', async t => {
-	const response = await get(s.url + '/');
+	const response = await get(s.url);
 	response.getContext = function () {
 		return this;
 	};
