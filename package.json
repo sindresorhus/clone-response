@@ -1,6 +1,6 @@
 {
   "name": "clone-response",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Clone a Node.js HTTP response stream",
   "main": "src/index.js",
   "scripts": {
