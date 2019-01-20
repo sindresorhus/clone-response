@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/lukechilds/clone-response",
   "dependencies": {
-    "mimic-response": "^1.0.0"
+    "mimic-response": "^2.0.0"
   },
   "devDependencies": {
     "ava": "^0.25.0",
