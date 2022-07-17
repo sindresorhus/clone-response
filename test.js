@@ -1,19 +1,26 @@
-import http from 'http';
-import { PassThrough } from 'stream';
+import http from 'node:http';
+import {PassThrough} from 'node:stream';
 import test from 'ava';
 import pify from 'pify';
 import getStream from 'get-stream';
 import createTestServer from 'create-test-server';
-import cloneResponse from '../';
+import cloneResponse from './index.js';
 
-const get = pify(http.get, { errorFirst: false });
+const get = pify(http.get, {errorFirst: false});
 
 let s;
 const responseText = 'Hi!';
 
 test.before(async () => {
 	s = await createTestServer();
-	s.get('/', (req, res) => res.send(responseText));
+
+	s.get('/', (request, response) => {
+		response.send(responseText);
+	});
+});
+
+test.after('cleanup', async () => {
+	await s.close();
 });
 
 test('cloneResponse is a function', t => {
@@ -27,9 +34,12 @@ test('returns a new PassThrough stream', async t => {
 	t.true(clonedResponse instanceof PassThrough);
 });
 
-test('throws TypeError if response isn\'t passed in', t => {
-	const error = t.throws(() => cloneResponse());
-	t.is(error.message, 'Parameter `response` must be a response stream.');
+test('throws TypeError if response is not passed in', t => {
+	t.throws(() => {
+		cloneResponse();
+	}, {
+		message: 'Parameter `response` must be a response stream.',
+	});
 });
 
 test('streaming a response twice should fail', async t => {
@@ -61,14 +71,12 @@ test('custom properties are copied over', async t => {
 
 test('function methods are bound to the original response instance', async t => {
 	const response = await get(s.url);
+
 	response.getContext = function () {
 		return this;
 	};
+
 	const clonedResponse = cloneResponse(response);
 
 	t.is(response.getContext(), clonedResponse.getContext());
-});
-
-test.after('cleanup', async () => {
-	await s.close();
 });
